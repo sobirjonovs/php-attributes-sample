@@ -30,9 +30,8 @@ class HomeController
     #[Router(path: '/menus/update', method: Router::PUT | Router::PATCH)]
     public function update(array $data): array
     {
-        var_dump($data);
         if (! isset($data['name'])) {
-            return ['message' => 'not found'];
+            return ['message' => 'Menu was not found'];
         }
 
         $this->menus['menus'][$data['name']] = $data['value'];
