@@ -31,7 +31,12 @@ class Router
     {
         $uri = parse_url($_SERVER['REQUEST_URI']);
 
-        $raw_data = json_decode(file_get_contents('php://input'), true) ?: [];
+        $raw_input = file_get_contents('php://input');
+        $raw_data = [];
+
+        if (! str_starts_with($raw_input, '-----------')) {
+            parse_str($raw_input, $raw_data);
+        }
 
         parse_str($uri['query'] ?? '', $query);
 
